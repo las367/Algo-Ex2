@@ -30,5 +30,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'Algo.Ex2.App'
+    mainClassName = 'Algo.Ex2.MyApp'
 }
