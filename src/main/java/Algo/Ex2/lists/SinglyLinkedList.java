@@ -1,4 +1,4 @@
-package Algo.Ex2;
+package Algo.Ex2.lists;
 
 /**
  * InnerSinglyLinkedList
@@ -114,7 +114,6 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
         return head == null;
     }
 

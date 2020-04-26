@@ -1,4 +1,4 @@
-package Algo.Ex2;
+package Algo.Ex2.lists;
 
 public class DoublyLinkedList<T> implements Listable<T> {
 
@@ -32,14 +32,41 @@ public class DoublyLinkedList<T> implements Listable<T> {
 
     @Override
     public void addLast(T data) {
-        // TODO Auto-generated method stub
+
+        Node node = new Node();
+        node.data = data;
+        node.next = null;
+
+        if (head == null) {
+            head = node;
+        } else {
+
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = node;
+        }
 
     }
 
     @Override
     public T get(int index) {
-        // TODO Auto-generated method stub
+        
+        int counter = 0;
+        Node current = head;
+
+        while (current != null) {
+            if (counter == index) {
+                return current.data;
+            }
+            
+            counter++;
+            current = current.next;
+        }
+
         return null;
+
     }
 
     @Override
@@ -62,20 +89,33 @@ public class DoublyLinkedList<T> implements Listable<T> {
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        return 0;
+
+        int counter = 0;
+        Node current = head;
+        
+        while (current != null) {
+            counter++;
+            current = current.next;
+        }
+
+        return counter;
     }
 
     @Override
     public void printAll() {
-        // TODO Auto-generated method stub
+
+        Node current = head;
+        while (current != null) {
+            System.out.println(current.data);
+            current = current.next;
+        }
 
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        return false;
+
+        return head == null;
     }
     
 }

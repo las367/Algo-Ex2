@@ -3,13 +3,53 @@
  */
 package Algo.Ex2;
 
+import Algo.Ex2.data.Student;
+import Algo.Ex2.lists.DoublyLinkedList;
+import Algo.Ex2.lists.Listable;
+import Algo.Ex2.lists.SinglyLinkedList;
+
 public class MyApp {
+
     public String getGreeting() {
         return "Testing from Gradle!";
     }
 
+    public static void run(Listable<Student> students) {
+        
+        //Folie suru readStudentFromStdin with parameter??
+        students.addLast(readStudentFromStdIn());
+
+        Student s2 = new Student("SHheldon", "Cooper", 67, 78);
+        Student s3 = new Student("Micky", "Maus", 67, 45);
+
+        students.add(s2);
+        students.addLast(s3);
+        printList(students);
+
+        students.clear();
+    }
+
+    public static Student readStudentFromStdIn() {
+        
+        Student student = new Student("Ted", "Mosby", 89, 89);
+        return student;
+    }
+
+    private static void printList(Listable<Student> students) {
+
+        System.out.println("Type: " + students.getClass().getSimpleName());
+        System.out.println("Size: " + students.size());
+        System.out.println("IsEmpty: " + students.isEmpty());
+        System.out.println("Students");
+        System.out.println("Get:" + students.get(0));
+        System.out.println("Get:" + students.get(1));
+        System.out.println("Get:" + students.get(2));
+        students.printAll();
+    }
+
     public static void main(String[] args) {
         
-        System.out.println("Hello World!");
+        run(new SinglyLinkedList<Student>());
+        run(new DoublyLinkedList<Student>());
     }
 }

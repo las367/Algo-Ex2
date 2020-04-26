@@ -1,4 +1,4 @@
-package Algo.Ex2;
+package Algo.Ex2.lists;
 
 public interface Listable<T> {
 
