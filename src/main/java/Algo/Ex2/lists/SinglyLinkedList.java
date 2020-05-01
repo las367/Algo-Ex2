@@ -53,16 +53,10 @@ public class SinglyLinkedList<T> implements Listable<T> {
             //First get parent and child node where the new node would be inserted 
             Node parentNode = getNodeByIndex(index - 1);
         
-            if (parentNode != null) {
-                
-                Node childNode = parentNode.next;
+            Node childNode = parentNode.next;
 
-                parentNode.next = node;
-                node.next = childNode;
-            } else {
-
-                addLast(data);
-            }
+            parentNode.next = node;
+            node.next = childNode;
         }
     }
 

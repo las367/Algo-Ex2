@@ -48,12 +48,15 @@ public class DoublyLinkedList<T> implements Listable<T> {
             //First get parent and child node where the new node would be inserted 
             Node parentNode = getNodeByIndex(index - 1);
         
-            if (parentNode != null) {
-                
+            if ( parentNode != tail ) {
+
                 Node childNode = parentNode.next;
 
-                parentNode.next = node;
+                node.prev = parentNode;
                 node.next = childNode;
+
+                parentNode.next = node;
+                childNode.prev = node;
             } else {
 
                 addLast(data);
@@ -70,8 +73,16 @@ public class DoublyLinkedList<T> implements Listable<T> {
         Node temp = head;
 
         //the exchange
-        head = node;
-        node.next = temp;
+        if ( head == null ) {
+
+            head = node;
+            tail = node;
+        } else {
+
+            head = node;
+            node.next = temp;
+            temp.prev = node;
+        }
     }
 
     @Override
@@ -81,7 +92,24 @@ public class DoublyLinkedList<T> implements Listable<T> {
         node.data = data;
         node.next = null;
 
-        tail.next = node;
+        if ( head == null ) {
+
+            head = node;
+            tail = node;
+        } else if ( head.next == null ) {
+            
+            tail = node;
+            tail.prev = head;
+            head.next = tail;
+        } else {
+
+            Node temp = tail;
+            tail = node;
+            tail.prev = temp;
+            temp.next = tail;
+        }
+
+        printAll();
     }
 
     @Override
