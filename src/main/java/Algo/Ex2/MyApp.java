@@ -4,6 +4,8 @@
 package Algo.Ex2;
 
 import Algo.Ex2.data.Student;
+import Algo.Ex2.helper.CourseComparator;
+import Algo.Ex2.helper.PrenameComparator;
 import Algo.Ex2.lists.DoublyLinkedList;
 import Algo.Ex2.lists.Listable;
 import Algo.Ex2.lists.SinglyLinkedList;
@@ -49,7 +51,7 @@ public class MyApp {
 
     public static void main(String[] args) {
         
-        run(new SinglyLinkedList<Student>());
-        run(new DoublyLinkedList<Student>());
+        // run(new SinglyLinkedList<Student>());
+        // run(new DoublyLinkedList<Student>());
     }
 }

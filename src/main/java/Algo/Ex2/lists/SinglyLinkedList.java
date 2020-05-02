@@ -1,5 +1,10 @@
 package Algo.Ex2.lists;
 
+import Algo.Ex2.helper.Comparator;
+import Algo.Ex2.sort.BubbleSort;
+import Algo.Ex2.sort.SelectionSort;
+import Algo.Ex2.sort.Sortable;
+
 /**
  * InnerSinglyLinkedList
  */
@@ -31,6 +36,56 @@ public class SinglyLinkedList<T> implements Listable<T> {
         }
 
         return null;
+    }
+
+    public Listable<T> searchBasedOnString( String query, Comparator<T> comparator ) {
+
+        Listable<T> list = new SinglyLinkedList<T>();
+
+        if ( head == null ) return null;
+
+        Node current = head;
+        while ( current != null ) {
+            System.out.println("not null");
+            if ( comparator.checkIfEqualsString(current.data, query) ) {
+                System.out.println(current.data);
+                list.add(current.data);
+            }
+
+            current = current.next;
+        }
+
+        return list;
+    }
+
+    public Listable<T> searchBasedOnInt( int query, Comparator<T> comparator ) {
+
+        Listable<T> list = new SinglyLinkedList<T>();
+
+        if ( head == null ) return null;
+
+        Node current = head;
+        while ( current != null ) {
+
+            if ( comparator.checkIfEqualsInt(current.data, query) ) {
+
+                list.add(current.data);
+            }
+
+            current = current.next;
+        }
+
+        return list;
+    }
+
+    public void bubbleSort( Comparator<T> comparator ) {
+
+        new BubbleSort<T>().sort(this, comparator);
+    }
+
+    public void selectionSort( Comparator<T> comparator ) {
+
+        new SelectionSort<T>().sort(this, comparator);
     }
 
     @Override
@@ -173,4 +228,23 @@ public class SinglyLinkedList<T> implements Listable<T> {
         return head == null;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        SinglyLinkedList<T> toCompare = (SinglyLinkedList<T>) obj;
+
+        Node current = head;
+        Node compareCurrent = toCompare.head;
+
+        while ( current != null && compareCurrent != null ) {
+
+            if ( !current.data.equals(compareCurrent.data) ) return false;
+
+            current = current.next;
+            compareCurrent = compareCurrent.next;
+        }
+
+        if ( current == null && compareCurrent == null ) return true;
+
+        return false;
+    }
 }
