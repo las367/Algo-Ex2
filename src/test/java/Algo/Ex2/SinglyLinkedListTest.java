@@ -15,6 +15,8 @@ public class SinglyLinkedListTest {
     
     Listable<Integer> list = new SinglyLinkedList<Integer>();
     SinglyLinkedList<Student> studentList = new SinglyLinkedList<Student>();
+    Student s2 = new Student("SHheldon", "Cooper", 67, 78);
+    Student s3 = new Student("Micky", "Maus", 67, 45);
 
     @Test
     public void getAndSize() {
@@ -29,18 +31,13 @@ public class SinglyLinkedListTest {
     @Test
     public void searchBasedOnString() {
 
-        Student s2 = new Student("SHheldon", "Cooper", 67, 78);
-        Student s3 = new Student("Micky", "Maus", 67, 45);
-
         studentList.add(s2);
         studentList.add(s3);
 
         Listable<Student> expectedResult = new SinglyLinkedList<Student>();
         expectedResult.add(s3);
-        expectedResult.printAll();
 
         Listable<Student> actualResult = studentList.searchBasedOnString(s3.getPrename(), new PrenameComparator());
-        actualResult.printAll();
 
         assertEquals("Test on the search functionality based on prename", true, actualResult.equals(expectedResult));
     }
@@ -48,27 +45,19 @@ public class SinglyLinkedListTest {
     @Test
     public void searchBasedOnInt() {
 
-        Student s2 = new Student("SHheldon", "Cooper", 67, 78);
-        Student s3 = new Student("Micky", "Maus", 67, 45);
-
         studentList.add(s2);
         studentList.add(s3);
 
         Listable<Student> expectedResult = new SinglyLinkedList<Student>();
         expectedResult.add(s2);
         expectedResult.add(s3);
-        expectedResult.printAll();
 
         Listable<Student> actualResult = studentList.searchBasedOnInt(s3.getCourse(), new CourseComparator());
-        actualResult.printAll();
         assertEquals("Test on the search functionality based on course num", true, actualResult.equals(expectedResult));
     }
 
     @Test
     public void bubbleSort() {
-
-        Student s2 = new Student("SHheldon", "Cooper", 67, 78);
-        Student s3 = new Student("Micky", "Maus", 67, 45);
 
         studentList.add(s2);
         studentList.add(s3);
@@ -84,9 +73,6 @@ public class SinglyLinkedListTest {
 
     @Test
     public void selectionSort() {
-
-        Student s2 = new Student("SHheldon", "Cooper", 67, 78);
-        Student s3 = new Student("Micky", "Maus", 67, 45);
 
         studentList.add(s2);
         studentList.add(s3);

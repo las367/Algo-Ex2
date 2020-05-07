@@ -22,14 +22,11 @@ public class PrenameComparator implements Comparator<Student> {
     @Override
     public boolean checkIfEqualsString(Student o1, String query) {
         //just compare the prename of both of the students
-        System.out.println(o1.getPrename() + " prename");
-        System.out.println(query + " query");
         return o1.getPrename().equals(query);
     }
 
     @Override
     public boolean checkIfEqualsInt(Student o1, int query) {
-        // TODO Auto-generated method stub
         return false;
     }
     

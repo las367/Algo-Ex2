@@ -13,7 +13,6 @@ public class CourseComparator implements Comparator<Student> {
 
     @Override
     public boolean checkIfEqualsString(Student o1, String query) {
-        // TODO Auto-generated method stub
         return false;
     }
 

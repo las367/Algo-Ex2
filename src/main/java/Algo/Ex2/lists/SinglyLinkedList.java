@@ -3,12 +3,6 @@ package Algo.Ex2.lists;
 import Algo.Ex2.helper.Comparator;
 import Algo.Ex2.sort.BubbleSort;
 import Algo.Ex2.sort.SelectionSort;
-import Algo.Ex2.sort.Sortable;
-
-/**
- * InnerSinglyLinkedList
- */
-
 
 public class SinglyLinkedList<T> implements Listable<T> {
 
@@ -46,9 +40,7 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
         Node current = head;
         while ( current != null ) {
-            System.out.println("not null");
             if ( comparator.checkIfEqualsString(current.data, query) ) {
-                System.out.println(current.data);
                 list.add(current.data);
             }
 

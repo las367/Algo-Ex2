@@ -25,7 +25,7 @@ public class DoublyLinkedList<T> implements Listable<T> {
     }
 
     private Node getNodeByIndex(int index) {
-
+        //TODO optimize => get the size then when index > middle => start from tail.
         Node current = head;
         int counter = 0;
 
