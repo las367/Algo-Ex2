@@ -1,5 +1,9 @@
 package Algo.Ex2.lists;
 
+import Algo.Ex2.helper.Comparator;
+import Algo.Ex2.sort.BubbleSort;
+import Algo.Ex2.sort.SelectionSort;
+
 public class DoublyLinkedList<T> implements Listable<T> {
 
     Node head = null;
@@ -10,6 +14,14 @@ public class DoublyLinkedList<T> implements Listable<T> {
         T data;
         Node prev;
         Node next;
+    }
+
+    //to check if the node from left and right overflows e.g left reached index 2 while right reached index 3/2
+    public boolean nodeOverflows(Node left, Node right) {
+
+        if ( left.next == right.prev ) return true;
+        
+        return left == right;
     }
 
     private Node getNodeByIndex(int index) {
@@ -29,6 +41,84 @@ public class DoublyLinkedList<T> implements Listable<T> {
         return null;
     }
 
+    //implemented search algorithm here => moves from both head and tail to make the algo quicker.
+
+    public Listable<T> searchBasedOnInt( int query, Comparator<T> comparator ) {
+
+        Listable<T> list = new DoublyLinkedList<>();
+
+        if ( head == null ) return null;
+        if ( tail == null ) {
+            if ( comparator.checkIfEqualsInt(head.data, query) ) {
+                list.add(head.data);
+                return list;
+            }
+        }
+
+        Node currentLeft = head;
+        Node currentRight = tail;
+
+        while ( !nodeOverflows(currentLeft, currentRight) ) {
+
+            if ( comparator.checkIfEqualsInt(currentLeft.data, query) ) {
+                list.add(currentLeft.data);
+            }
+
+            if ( comparator.checkIfEqualsInt(currentRight.data, query) ) {
+                list.add(currentRight.data);
+            }
+
+            currentLeft = currentLeft.next;
+            currentRight = currentRight.prev;
+
+        }
+
+        return list;
+    }
+
+    public Listable<T> searchBasedOnString( String query, Comparator<T> comparator ) {
+
+        Listable<T> list = new DoublyLinkedList<>();
+
+        if ( head == null ) return null;
+        if ( tail == null ) {
+            if ( comparator.checkIfEqualsString(head.data, query) ) {
+                list.add(head.data);
+                return list;
+            }
+        }
+
+        Node currentLeft = head;
+        Node currentRight = tail;
+
+        while ( !nodeOverflows(currentLeft, currentRight) ) {
+
+            if ( comparator.checkIfEqualsString(currentLeft.data, query) ) {
+                list.add(currentLeft.data);
+            }
+
+            if ( comparator.checkIfEqualsString(currentRight.data, query) ) {
+                list.add(currentRight.data);
+            }
+
+            currentLeft = currentLeft.next;
+            currentRight = currentRight.prev;
+
+        }
+
+        return list;
+    }
+
+    public void bubbleSort( Comparator<T> comparator ) {
+
+        new BubbleSort<T>().sort(this, comparator);
+    }
+
+    public void selectionSort( Comparator<T> comparator ) {
+
+        new SelectionSort<T>().sort(this, comparator);
+    }
+
     @Override
     public void add(T data) {
 
@@ -43,24 +133,23 @@ public class DoublyLinkedList<T> implements Listable<T> {
 
         //if the index given is at least no bigger than the size (size is length + 1) means
         //when index == size => addLast
-        if ( index <= size() ) {
-
-            //First get parent and child node where the new node would be inserted 
-            Node parentNode = getNodeByIndex(index - 1);
+        //First get parent and child node where the new node would be inserted 
+        Node parentNode = getNodeByIndex(index - 1);
         
-            if ( parentNode != tail ) {
+        if ( parentNode == null ) return;
 
-                Node childNode = parentNode.next;
+        if ( parentNode != tail ) {
 
-                node.prev = parentNode;
-                node.next = childNode;
+            Node childNode = parentNode.next;
 
-                parentNode.next = node;
-                childNode.prev = node;
-            } else {
+            node.prev = parentNode;
+            node.next = childNode;
 
-                addLast(data);
-            }
+            parentNode.next = node;
+            childNode.prev = node;
+        } else {
+
+            addLast(data);
         }
     }
 
@@ -76,7 +165,6 @@ public class DoublyLinkedList<T> implements Listable<T> {
         if ( head == null ) {
 
             head = node;
-            tail = node;
         } else {
 
             head = node;
@@ -95,7 +183,6 @@ public class DoublyLinkedList<T> implements Listable<T> {
         if ( head == null ) {
 
             head = node;
-            tail = node;
         } else if ( head.next == null ) {
             
             tail = node;
@@ -108,8 +195,6 @@ public class DoublyLinkedList<T> implements Listable<T> {
             tail.prev = temp;
             temp.next = tail;
         }
-
-        printAll();
     }
 
     @Override
@@ -187,6 +272,26 @@ public class DoublyLinkedList<T> implements Listable<T> {
     public boolean isEmpty() {
 
         return head == null;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        DoublyLinkedList<T> toCompare = (DoublyLinkedList<T>) obj;
+
+        Node current = head;
+        Node compareCurrent = toCompare.head;
+
+        while ( current != null && compareCurrent != null ) {
+
+            if ( !current.data.equals(compareCurrent.data) ) return false;
+
+            current = current.next;
+            compareCurrent = compareCurrent.next;
+        }
+
+        if ( current == null && compareCurrent == null ) return true;
+
+        return false;
     }
     
 }

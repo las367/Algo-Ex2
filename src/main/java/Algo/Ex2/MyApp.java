@@ -5,6 +5,7 @@ package Algo.Ex2;
 
 import Algo.Ex2.data.Student;
 import Algo.Ex2.helper.CourseComparator;
+import Algo.Ex2.helper.MatriculationNumberComparator;
 import Algo.Ex2.helper.PrenameComparator;
 import Algo.Ex2.lists.DoublyLinkedList;
 import Algo.Ex2.lists.Listable;
@@ -51,7 +52,22 @@ public class MyApp {
 
     public static void main(String[] args) {
         
-        // run(new SinglyLinkedList<Student>());
-        // run(new DoublyLinkedList<Student>());
+        run(new SinglyLinkedList<Student>());
+        run(new DoublyLinkedList<Student>());
+        // DoublyLinkedList<Student> studentList = new DoublyLinkedList<Student>();
+        // Student s2 = new Student("SHheldon", "Cooper", 67, 78);
+        // Student s3 = new Student("Micky", "Maus", 67, 45);
+
+        // studentList.add(s2);
+        // studentList.add(s3);
+
+        // System.out.println("result");
+        // Listable<Student> expectedResult = new DoublyLinkedList<Student>();
+        // expectedResult.add(s3);
+        // expectedResult.printAll();
+
+        // System.out.println("search");
+        // Listable<Student> actualResult = studentList.searchBasedOnString(s3.getPrename(), new PrenameComparator());
+        // actualResult.printAll();
     }
 }

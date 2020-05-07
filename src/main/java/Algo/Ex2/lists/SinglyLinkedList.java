@@ -103,16 +103,15 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
         //if the index given is at least no bigger than the size (size is length + 1) means
         //when index == size => addLast
-        if ( index <= size() ) {
+        //First get parent and child node where the new node would be inserted 
+        Node parentNode = getNodeByIndex(index - 1);
 
-            //First get parent and child node where the new node would be inserted 
-            Node parentNode = getNodeByIndex(index - 1);
+        if ( parentNode == null ) return;
         
-            Node childNode = parentNode.next;
+        Node childNode = parentNode.next;
 
-            parentNode.next = node;
-            node.next = childNode;
-        }
+        parentNode.next = node;
+        node.next = childNode;
     }
 
     @Override
@@ -149,18 +148,6 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
     @Override
     public T get(int index) {
-
-        // int counter = 0;
-        // Node current = head;
-
-        // while (current != null) {
-        //     if (counter == index) {
-        //         return current.data;
-        //     }
-            
-        //     counter++;
-        //     current = current.next;
-        // }
 
         Node searchedElement = getNodeByIndex(index);
 
