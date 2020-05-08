@@ -3,6 +3,8 @@
  */
 package Algo.Ex2;
 
+import Algo.Ex2.commands.Console;
+import Algo.Ex2.commands.SelectionCommand;
 import Algo.Ex2.data.Student;
 import Algo.Ex2.helper.CourseComparator;
 import Algo.Ex2.helper.MatriculationNumberComparator;
@@ -69,5 +71,7 @@ public class MyApp {
         // System.out.println("search");
         // Listable<Student> actualResult = studentList.searchBasedOnString(s3.getPrename(), new PrenameComparator());
         // actualResult.printAll();
+
+        new SelectionCommand().execute();
     }   
 }

@@ -32,6 +32,7 @@ public class SinglyLinkedList<T> implements Listable<T> {
         return null;
     }
 
+    @Override
     public Listable<T> searchBasedOnString( String query, Comparator<T> comparator ) {
 
         Listable<T> list = new SinglyLinkedList<T>();
@@ -50,6 +51,7 @@ public class SinglyLinkedList<T> implements Listable<T> {
         return list;
     }
 
+    @Override
     public Listable<T> searchBasedOnInt( int query, Comparator<T> comparator ) {
 
         Listable<T> list = new SinglyLinkedList<T>();
@@ -70,11 +72,13 @@ public class SinglyLinkedList<T> implements Listable<T> {
         return list;
     }
 
+    @Override
     public void bubbleSort( Comparator<T> comparator ) {
 
         new BubbleSort<T>().sort(this, comparator);
     }
 
+    @Override
     public void selectionSort( Comparator<T> comparator ) {
 
         new SelectionSort<T>().sort(this, comparator);

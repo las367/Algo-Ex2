@@ -10,7 +10,7 @@ public class DoublyLinkedList<T> implements Listable<T> {
 
     Node head;
     Node tail;
-    int counter;
+    int size;
 
     private class Node {
     
@@ -29,48 +29,35 @@ public class DoublyLinkedList<T> implements Listable<T> {
 
     private Node getNodeByIndex(int index) {
         //TODO optimize => get the size then when index > middle => start from tail.
-        // Node current = head;
-        // int counter = 0;
 
-        // while ( current != null ) {
-        //     if ( counter == index ) {
-        //         return current;
-        //     }
-
-        //     counter++;
-        //     current = current.next;
-        // }
-
-        // return null;
-
-        if ( index > counter ) return null;
+        if ( index > size ) return null;
 
         Node current;
-        int count;
-        if ( index > counter / 2 ) {
+        int counter;
+        if ( index > size / 2 ) {
 
-            count = counter - 1;
+            counter = size - 1;
             current = tail;
             while ( current != null ) {
 
-                if ( count == index ) {
+                if ( counter == index ) {
                     return current;
                 }
 
-                count--;
+                counter--;
                 current = current.prev;
             }
         } else {
 
-            count = 0;
+            counter = 0;
             current = head;
             while ( current != null ) {
 
-                if ( count == index ) {
+                if ( counter == index ) {
                     return current;
                 }
 
-                count++;
+                counter++;
                 current = current.next;
             }
         }
@@ -80,6 +67,7 @@ public class DoublyLinkedList<T> implements Listable<T> {
 
     //implemented search algorithm here => moves from both head and tail to make the algo quicker.
 
+    @Override
     public Listable<T> searchBasedOnInt( int query, Comparator<T> comparator ) {
 
         Listable<T> list = new DoublyLinkedList<>();
@@ -115,6 +103,7 @@ public class DoublyLinkedList<T> implements Listable<T> {
         return list;
     }
 
+    @Override
     public Listable<T> searchBasedOnString( String query, Comparator<T> comparator ) {
 
         Listable<T> list = new DoublyLinkedList<>();
@@ -149,11 +138,13 @@ public class DoublyLinkedList<T> implements Listable<T> {
     }
 
     //implements swapper for each lists => swapper for singly != swapper for doubly!
+    @Override    
     public void bubbleSort( Comparator<T> comparator ) {
 
         new BubbleSort<T>().sort(this, comparator);
     }
-
+    
+    @Override
     public void selectionSort( Comparator<T> comparator ) {
 
         new SelectionSort<T>().sort(this, comparator);
@@ -186,8 +177,8 @@ public class DoublyLinkedList<T> implements Listable<T> {
             node.next = childNode;
 
             parentNode.next = node;
-            childNode.prev = node;
-            counter++;
+            if ( childNode != null ) childNode.prev = node;
+            size++;
         } else {
 
             addLast(data);
@@ -213,7 +204,7 @@ public class DoublyLinkedList<T> implements Listable<T> {
             temp.prev = node;
         }
 
-        counter++;
+        size++;
     }
 
     @Override
@@ -236,28 +227,14 @@ public class DoublyLinkedList<T> implements Listable<T> {
             Node temp = tail;
             tail = node;
             tail.prev = temp;
-            temp.next = tail;
+            if ( temp != null ) temp.next = tail;
         }
 
-        counter++;
+        size++;
     }
 
     @Override
     public T get(int index) {
-        
-        // int counter = 0;
-        // Node current = head;
-
-        // while (current != null) {
-        //     if (counter == index) {
-        //         return current.data;
-        //     }
-            
-        //     counter++;
-        //     current = current.next;
-        // }
-
-        // return null;
 
         Node node = getNodeByIndex(index);
 
@@ -286,7 +263,7 @@ public class DoublyLinkedList<T> implements Listable<T> {
 
             parentNode.next = searchedNode.next;
             searchedNode.next.prev = parentNode;
-            counter--;
+            size--;
         }
     }
 
@@ -294,12 +271,12 @@ public class DoublyLinkedList<T> implements Listable<T> {
     public void clear() {
 
         head = null;
-        counter = 0;
+        size = 0;
     }
 
     @Override
     public int size() {
-        return counter;
+        return size;
     }
 
     @Override
