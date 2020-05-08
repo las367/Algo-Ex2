@@ -52,8 +52,8 @@ public class MyApp {
 
     public static void main(String[] args) {
         
-        run(new SinglyLinkedList<Student>());
-        run(new DoublyLinkedList<Student>());
+        // run(new SinglyLinkedList<Student>());
+        // run(new DoublyLinkedList<Student>());
         // DoublyLinkedList<Student> studentList = new DoublyLinkedList<Student>();
         // Student s2 = new Student("SHheldon", "Cooper", 67, 78);
         // Student s3 = new Student("Micky", "Maus", 67, 45);
@@ -69,5 +69,5 @@ public class MyApp {
         // System.out.println("search");
         // Listable<Student> actualResult = studentList.searchBasedOnString(s3.getPrename(), new PrenameComparator());
         // actualResult.printAll();
-    }
+    }   
 }

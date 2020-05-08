@@ -6,8 +6,11 @@ import Algo.Ex2.sort.SelectionSort;
 
 public class DoublyLinkedList<T> implements Listable<T> {
 
-    Node head = null;
-    Node tail = null;
+    //TODO OPTIMIZE => set static variable size => faster getNodeByIndex.
+
+    Node head;
+    Node tail;
+    int counter;
 
     private class Node {
     
@@ -26,16 +29,50 @@ public class DoublyLinkedList<T> implements Listable<T> {
 
     private Node getNodeByIndex(int index) {
         //TODO optimize => get the size then when index > middle => start from tail.
-        Node current = head;
-        int counter = 0;
+        // Node current = head;
+        // int counter = 0;
 
-        while ( current != null ) {
-            if ( counter == index ) {
-                return current;
+        // while ( current != null ) {
+        //     if ( counter == index ) {
+        //         return current;
+        //     }
+
+        //     counter++;
+        //     current = current.next;
+        // }
+
+        // return null;
+
+        if ( index > counter ) return null;
+
+        Node current;
+        int count;
+        if ( index > counter / 2 ) {
+
+            count = counter - 1;
+            current = tail;
+            while ( current != null ) {
+
+                if ( count == index ) {
+                    return current;
+                }
+
+                count--;
+                current = current.prev;
             }
+        } else {
 
-            counter++;
-            current = current.next;
+            count = 0;
+            current = head;
+            while ( current != null ) {
+
+                if ( count == index ) {
+                    return current;
+                }
+
+                count++;
+                current = current.next;
+            }
         }
 
         return null;
@@ -48,7 +85,9 @@ public class DoublyLinkedList<T> implements Listable<T> {
         Listable<T> list = new DoublyLinkedList<>();
 
         if ( head == null ) return null;
+
         if ( tail == null ) {
+
             if ( comparator.checkIfEqualsInt(head.data, query) ) {
                 list.add(head.data);
                 return list;
@@ -109,6 +148,7 @@ public class DoublyLinkedList<T> implements Listable<T> {
         return list;
     }
 
+    //implements swapper for each lists => swapper for singly != swapper for doubly!
     public void bubbleSort( Comparator<T> comparator ) {
 
         new BubbleSort<T>().sort(this, comparator);
@@ -147,6 +187,7 @@ public class DoublyLinkedList<T> implements Listable<T> {
 
             parentNode.next = node;
             childNode.prev = node;
+            counter++;
         } else {
 
             addLast(data);
@@ -171,6 +212,8 @@ public class DoublyLinkedList<T> implements Listable<T> {
             node.next = temp;
             temp.prev = node;
         }
+
+        counter++;
     }
 
     @Override
@@ -195,25 +238,32 @@ public class DoublyLinkedList<T> implements Listable<T> {
             tail.prev = temp;
             temp.next = tail;
         }
+
+        counter++;
     }
 
     @Override
     public T get(int index) {
         
-        int counter = 0;
-        Node current = head;
+        // int counter = 0;
+        // Node current = head;
 
-        while (current != null) {
-            if (counter == index) {
-                return current.data;
-            }
+        // while (current != null) {
+        //     if (counter == index) {
+        //         return current.data;
+        //     }
             
-            counter++;
-            current = current.next;
-        }
+        //     counter++;
+        //     current = current.next;
+        // }
 
-        return null;
+        // return null;
 
+        Node node = getNodeByIndex(index);
+
+        if ( node == null ) return null;
+
+        return node.data;
     }
 
     @Override
@@ -235,25 +285,20 @@ public class DoublyLinkedList<T> implements Listable<T> {
         if ( searchedNode != null ) {
 
             parentNode.next = searchedNode.next;
+            searchedNode.next.prev = parentNode;
+            counter--;
         }
     }
 
     @Override
     public void clear() {
+
         head = null;
+        counter = 0;
     }
 
     @Override
     public int size() {
-
-        int counter = 0;
-        Node current = head;
-        
-        while (current != null) {
-            counter++;
-            current = current.next;
-        }
-
         return counter;
     }
 
