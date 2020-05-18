@@ -85,4 +85,18 @@ public class SinglyLinkedListTest {
 
         assertEquals("Test on the sort functionality based on prename", true, studentList.equals(expected));
     }
+
+    @Test 
+    public void remove () {
+
+        studentList.add(s3);
+        studentList.add(s2);
+
+        Listable<Student> expected = new SinglyLinkedList<Student>();
+        expected.add(s2);
+
+        studentList.remove(0);
+
+        assertEquals("removed Student on the first posiition!", true, studentList.equals(expected));
+    }
 }

@@ -176,7 +176,10 @@ public class ListCommands implements ICommand {
                     break;
                 
                 case 2:
-                    list.add(in.inputInt("Please insert the specified position"), createStudent());
+                    list.add(
+                        in.inputInt("Please insert the specified position"), 
+                        createStudent()
+                    );
                     break;
                 
                 case 3:
@@ -188,7 +191,10 @@ public class ListCommands implements ICommand {
                     break;
 
                 case 5:
-                    list.get(in.inputInt("Please insert the specified position"));
+                    System.out.println(
+                        list.get( in.inputInt("Please insert the specified position") )
+                    );
+
                     break;
 
                 case 6:
