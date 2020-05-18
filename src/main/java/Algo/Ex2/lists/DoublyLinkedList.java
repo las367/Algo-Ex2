@@ -256,14 +256,27 @@ public class DoublyLinkedList<T> implements Listable<T> {
     @Override
     public void remove(int index) {
 
-        Node parentNode = getNodeByIndex( index - 1 );
-        Node searchedNode = parentNode.next;
+        boolean indexIsZero = index == 0;
 
-        if ( searchedNode != null ) {
+        if ( indexIsZero ) {
 
-            parentNode.next = searchedNode.next;
-            searchedNode.next.prev = parentNode;
+            head = head.next;
+            head.prev = null;
             size--;
+
+        } else {
+
+            Node parentNode = getNodeByIndex( index - 1 );
+            Node searchedNode = null;
+
+            if  ( parentNode != null ) searchedNode = parentNode.next;
+    
+            if ( searchedNode != null ) {
+    
+                parentNode.next = searchedNode.next;
+                searchedNode.next.prev = parentNode;
+                size--;
+            }
         }
     }
 

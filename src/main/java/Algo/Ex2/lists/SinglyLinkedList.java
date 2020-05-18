@@ -167,12 +167,23 @@ public class SinglyLinkedList<T> implements Listable<T> {
     @Override
     public void remove(int index) {
 
-        Node parentNode = getNodeByIndex( index - 1 );
-        Node searchedNode = parentNode.next;
+        boolean indexIsZero = index == 0;
 
-        if ( searchedNode != null ) {
+        if ( indexIsZero ) {
 
-            parentNode.next = searchedNode.next;
+            //if index is zero, remove head.
+            head = head.next;
+        } else {
+
+            //if not, check if parent of the searched node exists.
+            Node parentNode = getNodeByIndex(index - 1);
+            Node searchedNode = null;
+
+            //if exist, set the searched node to its parent's next node
+            if ( parentNode != null ) searchedNode = parentNode.next;
+
+            //if the searched node exists.. set its parent's next node to its own next node.
+            if ( searchedNode != null ) parentNode.next = searchedNode.next;
         }
     }
 
