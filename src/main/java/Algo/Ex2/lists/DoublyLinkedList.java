@@ -274,7 +274,7 @@ public class DoublyLinkedList<T> implements Listable<T> {
             if ( searchedNode != null ) {
     
                 parentNode.next = searchedNode.next;
-                searchedNode.next.prev = parentNode;
+                if ( searchedNode.next != null ) searchedNode.next.prev = parentNode;
                 size--;
             }
         }
