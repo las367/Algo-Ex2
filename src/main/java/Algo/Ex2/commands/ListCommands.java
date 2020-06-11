@@ -12,7 +12,8 @@ public class ListCommands implements ICommand {
     private Listable<Student> list;
     private Console in = new Console();
 
-    private final String MENU_TEXT = "1. Add Student to the end of this list." +"\n" +
+    private final String MENU_TEXT = "\nConsole Menu\n" +
+                                    "1. Add Student to the end of this list." +"\n" +
                                     "2. Inserts the Student at the specified position in this list." +"\n" +
                                     "3. Inserts the Student at the beginning of this list." +"\n" +
                                     "4. Appends the Student to the end of this list." +"\n" +
@@ -31,14 +32,14 @@ public class ListCommands implements ICommand {
                                         "2. Search by surname?"  + "\n" + 
                                         "3. Search by course number?"  + "\n" + 
                                         "4. Search by matriculation number?"  + "\n\n" + 
-                                        "Please enter a number for an option:";
+                                        "Please enter a number for an option:\n";
 
     private final String SORT_TEXT = "Select a sorting method for sorting:" + "\n" +
                                     "1. Bubblesort?"  + "\n" +
                                     "2. Selectionsort?"  + "\n\n" +
-                                    "Please enter a number for an option: ";
+                                    "Please enter a number for an option:\n";
 
-    private final String FALSE_INPUT = "Please enter another number";
+    private final String FALSE_INPUT = "Please enter another number\n";
 
     public ListCommands(Listable<Student> list) {
 
@@ -47,15 +48,15 @@ public class ListCommands implements ICommand {
 
     private Student createStudent() {
 
-        String prename = in.inpuString("Please enter Prename: ");
-        String surname = in.inpuString("Please enter surname: ");
-        int course = in.inputInt("Please enter course number: ");
-        int matNumber = in.inputInt(" Please enter matriculation number: ");
+        String prename = in.inpuString("Please enter Prename: \n");
+        String surname = in.inpuString("Please enter surname: \n");
+        int course = in.inputInt("Please enter course number: \n");
+        int matNumber = in.inputInt("Please enter matriculation number: \n");
 
         return new Student(prename, surname, course, matNumber);
     }
 
-    private String searchTextFormatter(String text) { return "Please enter " + text + " for the search: "; }
+    private String searchTextFormatter(String text) { return "Please enter " + text + " for the search: \n"; }
 
     private String sortTextFormatter(boolean doBubbleSort) {
         String algo;
@@ -65,7 +66,7 @@ public class ListCommands implements ICommand {
         return "Please select a property for sorting with the" + algo + "algorithm: " + "\n" +
                 "1. Sort by course?"  + "\n" +
                 "2. Sort by matriculation number?"  + "\n" +
-                "Please enter a number for an option: ";
+                "Please enter a number for an option: \n";
     }
 
     private void search() {
@@ -177,7 +178,7 @@ public class ListCommands implements ICommand {
                 
                 case 2:
                     list.add(
-                        in.inputInt("Please insert the specified position"), 
+                        in.inputInt("Please insert the specified position\n"), 
                         createStudent()
                     );
                     break;
@@ -192,7 +193,7 @@ public class ListCommands implements ICommand {
 
                 case 5:
                     System.out.println(
-                        list.get( in.inputInt("Please insert the specified position") )
+                        list.get( in.inputInt("Please insert the specified position\n") )
                     );
 
                     break;
@@ -206,7 +207,7 @@ public class ListCommands implements ICommand {
                     break;
 
                 case 8:
-                    list.remove(in.inputInt("Please insert the specified position"));
+                    list.remove(in.inputInt("Please insert the specified position\n"));
                     break;
 
                 case 9: 
